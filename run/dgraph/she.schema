@@ -1,0 +1,10 @@
+name: string @index(term, trigram) @lang .
+hp: float @index(float) .
+level: string @index(term, trigram) .
+code: string @index(term, trigram) @lang .
+needs: uid @reverse @count .
+NEDLAGD: bool @index(bool) .
+scope: string @index(term) @lang .
+course: uid @reverse @count .
+master: bool @index(bool) .
+track: uid @reverse @count .
