@@ -15,8 +15,9 @@ $L = 0
 for ($row = 0; $row -lt $uid.length; $row++){
   # We reset all the lang if need be
   $L = 0
-  for ($col = 1; $col -lt $header.length-1; $col++){
 
+  for ($col = 1; $col -lt $header.length-1; $col++){
+    $ignore = $false
     $uniqueID = $uid[$row]
     $predicate = $header[$col]
     $relation = $csv[$row]."$predicate"
@@ -24,10 +25,11 @@ for ($row = 0; $row -lt $uid.length; $row++){
     # We need to differentiate whether the attribute is a uid-relation, multiple alternative (@lang) or just a value.
     # This identifier is removed in the output.
     switch ("$predicate"[0]) {
-      "!" {$relation = "_:$($relation)"}
-      "@" {if ($L+1 -gt $langs.length) {$predicate += "*ERROR ALL LANGS USED*"}; $relation = "`"$($relation)@$($langs[$L])`"";$L++}
+      "*" {$relation = "_:$($relation)"}
+      "@" {if ($L+1 -gt $langs.length) {$predicate += "*ERROR_ALL_LANGS_USED*"}; $relation = "`"$($relation)@$($langs[$L])`"";$L++}
+      "!" {$ignore = $true}
       default {$relation = "`"$($relation)`""}
     }
-    ac $output "$uniqueID <$($predicate.Substring(1))> $relation ."
+    if (-Not ($ignore)) {ac $output "$uniqueID <$($predicate.Substring(1))> $relation ."}
   }
 }
