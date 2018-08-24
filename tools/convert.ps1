@@ -1,6 +1,8 @@
 cls
-$input = "E:\User\Simon\document\GitHubE\olandr\detamata\tools\test.csv"
-$output = "E:\User\Simon\document\GitHubE\olandr\detamata\tools\test.rdf"
+$file = "voteringar"
+$input = "E:\User\Simon\document\GitHubE\olandr\detamata\tools\$($file).csv"
+$output = "E:\User\Simon\document\GitHubE\olandr\detamata\tools\$($file).rdf"
+echo $input $output
 rm $output -ea ig
 
 $header = (Get-Content $input | Select-Object -First 1).split(";")
@@ -26,10 +28,10 @@ for ($row = 0; $row -lt $uid.length; $row++){
     # This identifier is removed in the output.
     switch ("$predicate"[0]) {
       "*" {$relation = "_:$($relation)"}
-      "@" {if ($L+1 -gt $langs.length) {$predicate += "*ERROR_ALL_LANGS_USED*"}; $relation = "`"$($relation)@$($langs[$L])`"";$L++}
+      "@" {if ($L+1 -gt $langs.length) {$predicate += "*ERROR_ALL_LANGS_USED*"}; $relation = "`"$($relation)`"@$($langs[$L])";$L++}
       "!" {$ignore = $true}
       default {$relation = "`"$($relation)`""}
     }
-    if (-Not ($ignore)) {ac $output "$uniqueID <$($predicate.Substring(1))> $relation ."}
+    if (-Not ($ignore)) {ac $output "_:$uniqueID <$($predicate.Substring(1))> $relation ." -Encoding UTF8}
   }
 }
