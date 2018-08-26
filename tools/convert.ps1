@@ -1,3 +1,13 @@
+# input:
+# Different initial symbols declare what kind that cell is (pointer to node, value, ignore etc.)
+# [Head]: Id;(|*|@|!)\w+;(|*|@|!)\w+;...
+# [Body]: uniqueID;.*;.*;...
+# ...
+#
+# output:
+# _:uniqueID <predicate> _:node|"string/int/boolean"|@lang
+# ...
+
 cls
 $file = "voteringar"
 $input = "E:\User\Simon\document\GitHubE\olandr\detamata\tools\$($file).csv"
