@@ -1,44 +1,32 @@
-﻿_:12431 <attrib_2> _:STHLM .
-_:12431 <attrib_3> "10"@da .
-_:12431 <attrib_4> _:att53 .
-_:12431 <attrib_5> "att54"@nl .
-_:52352 <attrib_2> _:WDC .
-_:52352 <attrib_3> "200"@da .
-_:52352 <attrib_4> _:att53 .
-_:52352 <attrib_5> "att54"@nl .
-_:23526 <attrib_2> _:HP .
-_:23526 <attrib_3> "114"@da .
-_:23526 <attrib_4> _:att53 .
-_:23526 <attrib_5> "att54"@nl .
-_:51512 <attrib_2> _: .
-_:51512 <attrib_3> "145"@da .
-_:51512 <attrib_4> _:att53 .
-_:51512 <attrib_5> "att54"@nl .
-_:2141 <attrib_2> _:24 .
-_:2141 <attrib_3> "142"@da .
-_:2141 <attrib_4> _:att53 .
-_:2141 <attrib_5> "att54"@nl .
-_:2141 <attrib_2> _:24 .
-_:2141 <attrib_3> "142"@da .
-_:2141 <attrib_4> _:att53 .
-_:2141 <attrib_5> "att54"@nl .
-_:2141 <attrib_2> _:24 .
-_:2141 <attrib_3> "142"@da .
-_:2141 <attrib_4> _:att53 .
-_:2141 <attrib_5> "att54"@nl .
-_:2141 <attrib_2> _:24 .
-_:2141 <attrib_3> "142"@da .
-_:2141 <attrib_4> _:att53 .
-_:2141 <attrib_5> "att54"@nl .
-_:2141 <attrib_2> _:24 .
-_:2141 <attrib_3> "142"@da .
-_:2141 <attrib_4> _:att53 .
-_:2141 <attrib_5> "att54"@nl .
-_:2141 <attrib_2> _:24 .
-_:2141 <attrib_3> "142"@da .
-_:2141 <attrib_4> _:att53 .
-_:2141 <attrib_5> "att54"@nl .
-_:2141 <attrib_2> _:24 .
-_:2141 <attrib_3> "142"@da .
-_:2141 <attrib_4> _:att53 .
-_:2141 <attrib_5> "att54"@nl .
+_:1001 <attr1> _:foo .
+_:1001 <facet1> _:fact .
+_:1001 <attr2> "foo"@da (facet2=fact) .
+_:1001 <cet2> _:DRGfactRG .
+_:1002 <attr1> _:db .
+_:1002 <facet1> _:fact3 .
+_:1002 <attr2> "db"@da (facet2=fact3) .
+_:1002 <cet2> _:acRGRt3 .
+_:1003 <attr1> _:kui .
+_:1003 <facet1> _:fac2t .
+_:1003 <attr2> "ui"@da (facet2=fac2t) .
+_:1003 <cet2> _:acSREG2t .
+_:1004 <attr1> _:ejetj .
+_:1004 <facet1> _:f4act .
+_:1004 <attr2> "tj"@da (facet2=f4act) .
+_:1004 <cet2> _:4SGact .
+_:1005 <attr1> _:jetj .
+_:1005 <facet1> _:fac5t .
+_:1005 <attr2> "tj"@da (facet2=fac5t) .
+_:1005 <cet2> _:acSGE5t .
+_:1006 <attr1> _:fhrewh .
+_:1006 <facet1> _:f73act .
+_:1006 <attr2> "h"@da (facet2=f73act) .
+_:1006 <cet2> _:RGR3act .
+_:1007 <attr1> _:fgqeg .
+_:1007 <facet1> _:fac4t .
+_:1007 <attr2> "eg"@da (facet2=fac4t) .
+_:1007 <cet2> _:acEG4t .
+_:1008 <attr1> _:qwe .
+_:1008 <facet1> _:fact234 .
+_:1008 <attr2> ""@da (facet2=fact234) .
+_:1008 <cet2> _:t2SG34 

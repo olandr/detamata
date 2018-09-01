@@ -9,7 +9,7 @@
 # ...
 
 cls
-$file = "voteringar"
+$file = "test"
 $input = "E:\User\Simon\document\GitHubE\olandr\detamata\tools\$($file).csv"
 $output = "E:\User\Simon\document\GitHubE\olandr\detamata\tools\$($file).rdf"
 echo $input $output
@@ -33,15 +33,18 @@ for ($row = 0; $row -lt $uid.length; $row++){
     $uniqueID = $uid[$row]
     $predicate = $header[$col]
     $relation = $csv[$row]."$predicate"
-
-    # We need to differentiate whether the attribute is a uid-relation, multiple alternative (@lang) or just a value.
+    # We need to differentiate whether the attribute is a uid-relation, multiple alternative (@lang), ignore, facets or just a value.
     # This identifier is removed in the output.
     switch ("$predicate"[0]) {
       "*" {$relation = "_:$($relation)"}
       "@" {if ($L+1 -gt $langs.length) {$predicate += "*ERROR_ALL_LANGS_USED*"}; $relation = "`"$($relation)`"@$($langs[$L])";$L++}
       "!" {$ignore = $true}
+      "#" {ac $output "`($($predicate.Substring(1, $predicate.length -1))=$($relation)`) " -Encoding UTF8 -NoNewLine; $ignore = $true}
       default {$relation = "`"$($relation)`""}
     }
-    if (-Not ($ignore)) {ac $output "_:$uniqueID <$($predicate.Substring(1))> $relation ." -Encoding UTF8}
+    if (-Not ($ignore)) {ac $output ".`r`n_:$uniqueID <$($predicate.Substring(1))> $relation " -Encoding UTF8 -NoNewLine}
   }
 }
+# In this verison, I append a .\r\n on every line (that is not ignored). This means that the first line gets a .\r\n. This needs to be removed:
+Get-Content $output | select -Skip 1 | Set-Content "$output-temp"
+move $output-temp $output -Force
