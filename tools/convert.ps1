@@ -33,18 +33,21 @@ for ($row = 0; $row -lt $uid.length; $row++){
     $uniqueID = $uid[$row]
     $predicate = $header[$col]
     $relation = $csv[$row]."$predicate"
-    $remove = 1;
-    # We need to differentiate whether the attribute is a uid-relation, multiple alternative (@lang), ignore, facets or just a value.
-    # This identifier is removed in the output.
-    switch ("$predicate"[0]) {
-      "*" {$relation = "_:$($relation)"}
-      "@" {if ($L+1 -gt $langs.length) {$predicate += "*ERROR_ALL_LANGS_USED*"}; $relation = "`"$($relation)`"@$($langs[$L])";$L++}
-      "!" {$ignore = $true}
-      "#" {ac $output "`($($predicate.Substring(1, $predicate.length -1))=$($relation)`) " -Encoding UTF8 -NoNewLine; $ignore = $true}
-      default {$relation = "`"$($relation)`"";$remove = 0}
+    if($relation -ne "") {
+      $remove = 1;
+      # We need to differentiate whether the attribute is a uid-relation, multiple alternative (@lang), ignore, facets or just a value.
+      # This identifier is removed in the output.
+      switch ("$predicate"[0]) {
+        "*" {$relation = "_:$($relation)"}
+        "@" {if ($L+1 -gt $langs.length) {$predicate += "*ERROR_ALL_LANGS_USED*"}; $relation = "`"$($relation)`"@$($langs[$L])";$L++}
+        "!" {$ignore = $true}
+        "#" {ac $output "`($($predicate.Substring(1, $predicate.length -1))=$($relation)`) " -Encoding UTF8 -NoNewLine; $ignore = $true}
+        default {$relation = "`"$($relation)`"";$remove = 0}
+      }
+      if (-Not ($ignore)) {ac $output ".`r`n_:$uniqueID <$($predicate.Substring($remove))> $relation " -Encoding UTF8 -NoNewLine}
     }
-    if (-Not ($ignore)) {ac $output ".`r`n_:$uniqueID <$($predicate.Substring($remove))> $relation " -Encoding UTF8 -NoNewLine}
   }
+
 }
 # In this verison, I append a .\r\n on every line (that is not ignored). This means that the first line gets a .\r\n. This needs to be removed:
 Get-Content $output | select -Skip 1 | Set-Content "$output-temp"

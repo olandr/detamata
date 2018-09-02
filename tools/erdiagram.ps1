@@ -48,17 +48,20 @@ for ($row = 0; $row -lt $tables.length; $row++){
     $tab = $tables[$row]
     $predicate = $header[$col]
     $relation = $csv[$row]."$predicate"
-    $remove = 1;
-    # We need to differentiate whether the attribute is a uid-relation, multiple alternative (@lang), ignore, facets or just a value.
-    # This identifier is removed in the output.
-    switch ("$predicate"[0]) {
-      "*" {$relation = "_:$($relation)"}
-      "@" {if ($L+1 -gt $langs.length) {$predicate += "*ERROR_ALL_LANGS_USED*"}; $relation = "`"$($relation)`"@$($langs[$L])";$L++}
-      "!" {$ignore = $true}
-      "#" {ac $output "`($($predicate.Substring(1, $predicate.length -1))=$($relation)`) " -Encoding UTF8 -NoNewLine; $ignore = $true}
-      default {$relation = "`"$($relation)`"";$remove = 0}
+    if($relation -ne "") {
+      $remove = 1;
+      # We need to differentiate whether the attribute is a uid-relation, multiple alternative (@lang), ignore, facets or just a value.
+      # This identifier is removed in the output.
+      switch ("$predicate"[0]) {
+        "*" {$relation = "_:$($relation)"}
+        "@" {if ($L+1 -gt $langs.length) {$predicate += "*ERROR_ALL_LANGS_USED*"}; $relation = "`"$($relation)`"@$($langs[$L])";$L++}
+        "!" {$ignore = $true}
+        "#" {ac $output "`($($predicate.Substring(1, $predicate.length -1))=`"$($relation)`"`) " -Encoding UTF8 -NoNewLine; $ignore = $true}
+        default {$relation = "`"$($relation)`"";$remove = 0}
+      }
+
+      if (-Not ($ignore)) {ac $output ".`r`n_:$tab <$($predicate.Substring($remove))> $relation " -Encoding UTF8 -NoNewLine}
     }
-    if (-Not ($ignore)) {ac $output ".`r`n_:$tab <$($predicate.Substring($remove))> $relation " -Encoding UTF8 -NoNewLine}
   }
 }
 # Due to iterative newline-dot creation I have to append one dot independently to the other ones, prior to adding names.
