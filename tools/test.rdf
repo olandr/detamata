@@ -1,8 +1,8 @@
-_:students <column> _:student_uid .
+_:students <column> _:student_uid (key="primary") .
 _:students <column> _:name .
 _:students <column> _:address .
-_:students <column> _:tel .
-_:students <column> _:email .
+_:students <column> _:tel (key="unique") .
+_:students <column> _:email (key="unique") .
 _:students <column> _:date_birth .
 _:students <column> _:gender .
 _:students <column> _:category .
@@ -13,47 +13,49 @@ _:students <column> _:school .
 _:students <column> _:department .
 _:halls <column> _:name .
 _:halls <column> _:address .
-_:halls <column> _:tel .
+_:halls <column> _:tel (key="unique") .
 _:halls <column> _:hall_manager .
-_:halls <column> _:place_number .
-_:rooms <column> _:place_number .
+_:halls <column> _:place_number (key="foreign") .
+_:rooms <column> _:place_number (key="primary") .
 _:rooms <column> _:room_number .
 _:rooms <column> _:rent .
-_:flats <column> _:apt_number .
+_:flats <column> _:apt_number (key="primary") .
 _:flats <column> _:address .
 _:flats <column> _:number_rooms .
-_:flats <column> _:place_number .
-_:leases <column> _:lease_number .
+_:flats <column> _:place_number (key="foreign") .
+_:leases <column> _:lease_number (key="primary") .
 _:leases <column> _:duration .
 _:leases <column> _:student_name .
-_:leases <column> _:student_uid .
-_:leases <column> _:place_number .
+_:leases <column> _:student_uid (key="foreign") .
+_:leases <column> _:place_number (key="foreign") .
 _:leases <column> _:moving_in .
 _:leases <column> _:moving_out .
-_:invoices <column> _:invoice_number .
-_:invoices <column> _:lease_number .
+_:invoices <column> _:invoice_number (key="primary") .
+_:invoices <column> _:lease_number (key="foreign") .
 _:invoices <column> _:payment_due .
-_:invoices <column> _:student_uid .
-_:invoices <column> _:place_number .
+_:invoices <column> _:student_uid (key="foreign") .
+_:invoices <column> _:place_number (key="foreign") .
 _:invoices <column> _:paid .
 _:invoices <column> _:method .
 _:invoices <column> _:first_reminder .
 _:invoices <column> _:second_reminder .
+_:inspections <column> _:staff_number (key="foreign") .
 _:inspections <column> _:name .
 _:inspections <column> _:inspected .
 _:inspections <column> _:satisfactory .
 _:inspections <column> _:comments .
-_:staff <column> _:staff_number .
+_:staff <column> _:staff_number (key="primary") .
 _:staff <column> _:name .
-_:staff <column> _:email .
+_:staff <column> _:email (key="unique") .
 _:staff <column> _:address .
 _:staff <column> _:date_birth .
 _:staff <column> _:position .
 _:staff <column> _:location .
+_:Next-of-kin <column> _:student_uid (key="foreign") .
 _:Next-of-kin <column> _:name .
 _:Next-of-kin <column> _:relation .
 _:Next-of-kin <column> _:address .
-_:Next-of-kin <column> _:tel .
+_:Next-of-kin <column> _:tel (key="unique") .
 _:students <name> "students" .
 _:students <TYPE> "TABLE" .
 _:halls <name> "halls" .
@@ -132,14 +134,14 @@ _:first_reminder <name> "first_reminder" .
 _:first_reminder <TYPE> "COLUMN" .
 _:second_reminder <name> "second_reminder" .
 _:second_reminder <TYPE> "COLUMN" .
+_:staff_number <name> "staff_number" .
+_:staff_number <TYPE> "COLUMN" .
 _:inspected <name> "inspected" .
 _:inspected <TYPE> "COLUMN" .
 _:satisfactory <name> "satisfactory" .
 _:satisfactory <TYPE> "COLUMN" .
 _:comments <name> "comments" .
 _:comments <TYPE> "COLUMN" .
-_:staff_number <name> "staff_number" .
-_:staff_number <TYPE> "COLUMN" .
 _:position <name> "position" .
 _:position <TYPE> "COLUMN" .
 _:location <name> "location" .
