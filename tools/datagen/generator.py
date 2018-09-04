@@ -5,43 +5,50 @@ input="/Users/simon/Docs/olandr/detamata/tools/datagen/in.csv"
 output="/Users/simon/Docs/olandr/detamata/tools/datagen/out.csv"
 print(input, output)
 
-data = pd.read_csv(input, sep=';', header=0)
+data = pd.read_csv(input, sep=';', header=0, encoding="utf-8-sig")
 # Gather the header row (first row; specifief by header=0 above)
 header = list(data)
 
-# We have four tables, two are the unique table nams and column names. And two are not.
 utables = data.ix[:,0].unique()
-ucolumns = data.ix[:,1].unique()
 
 
 
 
+# VARCHAR(SIZE)
 SIZE = "255"
+
 outstring = []
+# Delete contents of output file
 open(output, "w").close()
 with open(output, "a") as out:
+    # We iterate across each unique table as we want to make CREATE TABLE utable (...)
     for utable in utables:
-        row = data[data.table == utable]
-        print(row.type)
-        index = 0
-        for row in rows:
-            if (types[index] == "datetime"):
+        ind = 1
+        # Get all the rows with the current utable
+        rows = data[data['*table'] == utable]
+        outstring.append("CREATE TABLE " + utable + "(\n")
+        # We want, for each column/attrib, iterate through.
+        while ind <= len(rows):
+            #Initialisation of CREATE TABLE
+            outstring.append("\t" + rows['*column'][ind-1:ind].all() + " ")
+            # Case consideration
+            if ((rows['!type'][ind-1:ind] == 'datetime').bool()):
                 outstring.append("DATETIME")
-            if (types[index] == "string"):
+            if ((rows['!type'][ind-1:ind] == 'string').bool()):
                 outstring.append("VARCHAR(" + SIZE + ")")
-            if (types[index] == "int"):
+            if ((rows['!type'][ind-1:ind] == 'int').bool()):
                 outstring.append("INT")
 
-            if (index == len(columns)-1):
-                outstring.append(")")
-                break
+            if (ind == len(rows)):
+                outstring.append("\n)\n")
             else:
-                outstring.append(",")
-            index += 1
+                outstring.append(",\n")
+            ind += 1
 
+    # Here we write to the outputfile
     jndex = 0
-    while jndex < len(outstring)-1:
-        out.write(outstring[jndex] + outstring[jndex +1] + "\n")
-        jndex += 2
+    while jndex < len(outstring):
+        out.write(outstring[jndex])
+        jndex += 1
 
 out.close()

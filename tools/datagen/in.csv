@@ -1,4 +1,4 @@
-table;column;key;type;
+*table;*column;#key;!type;
 students;student_uid;primary;int
 students;name;;string
 students;address;;string
@@ -51,7 +51,7 @@ staff;address;;string
 staff;date_birth;;datetime
 staff;position;;string
 staff;location;;string
-Next-of-kin;student_uid;foreign;id
+Next-of-kin;student_uid;foreign;int
 Next-of-kin;name;;string
 Next-of-kin;relation;;string
 Next-of-kin;address;;string
