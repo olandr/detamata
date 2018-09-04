@@ -12,15 +12,14 @@ _:students <column> _:status .
 _:students <column> _:school .
 _:students <column> _:department .
 _:halls <column> _:name .
-_:halls <column> _:address .
 _:halls <column> _:tel (key="unique") .
 _:halls <column> _:hall_manager .
 _:halls <column> _:place_number (key="foreign") .
 _:rooms <column> _:place_number (key="primary") .
 _:rooms <column> _:room_number .
 _:rooms <column> _:rent .
+_:rooms <column> _:address .
 _:flats <column> _:apt_number (key="primary") .
-_:flats <column> _:address .
 _:flats <column> _:number_rooms .
 _:flats <column> _:place_number (key="foreign") .
 _:leases <column> _:lease_number (key="primary") .

@@ -24,5 +24,5 @@ pause 'Press any key to terminate the process...'
 kill %1
 kill %2
 kill %3
-sleep 3
+sleep 5
 echo "Done"
