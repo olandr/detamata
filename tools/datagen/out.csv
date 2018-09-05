@@ -1,9 +1,75 @@
-184001;world;complements;184004;modes;2004-09-09 00:00:00;chin;streams;captain;bombs;fuels;sleep;keys;
-contempt;184002;planes;184004;
-184001;184002;184003;tissue;
-184001;184002;184003;
-184001;184002;miles;184004;184005;2003-09-10 00:00:00;2008-03-24 00:00:00;
-184001;184002;2017-03-06 00:00:00;184004;184005;1982-06-17 00:00:00;compensation;1988-05-28 00:00:00;1990-11-27 00:00:00;
-184001;opposites;diesels;vapors;anthems;
-184001;paste;184003;washer;1989-02-13 00:00:00;price;endings;
-184001;horsepower;hinges;door;184005;
+CREATE TABLE students(
+	student_uid INT,
+	name VARCHAR(255),
+	address VARCHAR(255),
+	tel INT,
+	email VARCHAR(255),
+	date_birth DATETIME,
+	gender VARCHAR(255),
+	category VARCHAR(255),
+	special_needs VARCHAR(255),
+	comment VARCHAR(255),
+	status VARCHAR(255),
+	school VARCHAR(255),
+	department VARCHAR(255)
+);
+CREATE TABLE halls(
+	name VARCHAR(255),
+	tel INT,
+	hall_manager VARCHAR(255),
+	place_number INT
+);
+CREATE TABLE rooms(
+	place_number INT,
+	room_number INT,
+	rent INT,
+	address VARCHAR(255)
+);
+CREATE TABLE flats(
+	apt_number INT,
+	number_rooms INT,
+	place_number INT
+);
+CREATE TABLE leases(
+	lease_number INT,
+	duration INT,
+	student_name VARCHAR(255),
+	student_uid INT,
+	place_number INT,
+	moving_in DATETIME,
+	moving_out DATETIME
+);
+CREATE TABLE invoices(
+	invoice_number INT,
+	lease_number INT,
+	payment_due DATETIME,
+	student_uid INT,
+	place_number INT,
+	paid DATETIME,
+	method VARCHAR(255),
+	first_reminder DATETIME,
+	second_reminder DATETIME
+);
+CREATE TABLE inspections(
+	staff_number INT,
+	name VARCHAR(255),
+	inspected VARCHAR(255),
+	satisfactory VARCHAR(255),
+	comments VARCHAR(255)
+);
+CREATE TABLE staff(
+	staff_number INT,
+	name VARCHAR(255),
+	email INT,
+	address VARCHAR(255),
+	date_birth DATETIME,
+	position VARCHAR(255),
+	location VARCHAR(255)
+);
+CREATE TABLE Next-of-kin(
+	student_uid INT,
+	name VARCHAR(255),
+	relation VARCHAR(255),
+	address VARCHAR(255),
+	tel INT
+);

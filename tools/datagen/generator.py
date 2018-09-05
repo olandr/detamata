@@ -38,9 +38,8 @@ with open(output, "a") as out:
                 outstring.append("VARCHAR(" + SIZE + ")")
             if ((rows['!type'][ind-1:ind] == 'int').bool()):
                 outstring.append("INT")
-
             if (ind == len(rows)):
-                outstring.append("\n)\n")
+                outstring.append("\n);\n")
             else:
                 outstring.append(",\n")
             ind += 1
