@@ -1,3 +1,4 @@
+CREATE DATABASE homework CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE homework;
 CREATE TABLE students(
 	student_uid INT,
@@ -67,7 +68,7 @@ CREATE TABLE staff(
 	position VARCHAR(255),
 	location VARCHAR(255)
 );
-CREATE TABLE Next-of-kin(
+CREATE TABLE next_of_kin(
 	student_uid INT,
 	name VARCHAR(255),
 	relation VARCHAR(255),

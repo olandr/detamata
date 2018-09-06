@@ -90,6 +90,9 @@ while tuple < GENERATE:
             if ((typer == 'int').bool() and not (rows['#key'][index-1:index].str.contains('primary|foreign|unique', regex=True)).any()):
                 outstring.append(str(random.randint(1,100000)))
 
+            if (len(outstring) != 0 and (rows['!IS_NULLABLE'][index-1:index] == 'YES').bool()):
+                if(random.getrandbits(1)):
+                    outstring.pop()
             if (index == len(rows)):
                 outstring.append(";\n")
             else:
