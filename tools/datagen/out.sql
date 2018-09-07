@@ -70,7 +70,7 @@ CREATE TABLE staff(
 	location VARCHAR(255),
 	tel INT
 );
-CREATE TABLE next_of_kin(
+CREATE TABLE Next-of-kin(
 	student_uid INT,
 	name VARCHAR(255),
 	relation VARCHAR(255),
