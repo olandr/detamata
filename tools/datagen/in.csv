@@ -41,7 +41,8 @@ invoices;first_reminder;;datetime;YES
 invoices;second_reminder;;datetime;YES
 inspections;staff_number;foreign;int;NO
 inspections;name;;string;NO
-inspections;inspected;;string;NO
+inspections;place_number;foreign;int;NO
+inspections;inspected;;datetime;YES
 inspections;satisfactory;;string;YES
 inspections;comments;;string;YES
 staff;staff_number;primary;int;NO
