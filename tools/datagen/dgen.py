@@ -26,6 +26,10 @@ header = list(data)
 utables = data.ix[:,0].unique()
 # VARCHAR(SIZE)
 SIZE = "255"
+# So I have two constants for generation
+# BASEGEN is some amount of fully popuated table-relations. E.g. BASEGEN number of students will be related to all possible tablesself.
+# GENERATE will decide how many I want to randomise. E.g. I will get a student but no invoice for that student.
+BASEGEN = 20
 GENERATE = 100
 # SEED is the offset for unique values i.e. some_unique value = SEED + id
 SEED = 1951379
@@ -35,13 +39,15 @@ for utable in utables:
     open("tables/" + utable + ".csv", "w").close()
 tuple = 0
 ## We iterate across each unique table as we want to make create table utable
-while tuple < GENERATE:
+while tuple < GENERATE + BASEGEN:
     dictionary = {}
     # Parent unique-id (the unique base for this table)
     id += 1
     tuple += 1      # I use 1-indexexing hence 1 tuple IS 1 one row (not 0 tuples/rows)
     print(tuple)
     for utable in utables:
+        if (tuple > BASEGEN and bool(random.getrandbits(1))):
+            continue
         outstring = []
         index = 1
         # Get all the rows with the current utable

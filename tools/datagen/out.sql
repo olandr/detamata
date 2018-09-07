@@ -1,3 +1,4 @@
+DROP DATABASE homework;
 CREATE DATABASE homework CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE homework;
 CREATE TABLE students(
@@ -18,7 +19,7 @@ CREATE TABLE students(
 CREATE TABLE halls(
 	name VARCHAR(255),
 	tel INT,
-	hall_manager VARCHAR(255),
+	staff_number INT,
 	place_number INT
 );
 CREATE TABLE rooms(
@@ -66,7 +67,8 @@ CREATE TABLE staff(
 	address VARCHAR(255),
 	date_birth DATETIME,
 	position VARCHAR(255),
-	location VARCHAR(255)
+	location VARCHAR(255),
+	tel INT
 );
 CREATE TABLE next_of_kin(
 	student_uid INT,
