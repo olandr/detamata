@@ -2,7 +2,7 @@ import pandas as pd
 
 
 input="/Users/simon/Docs/olandr/detamata/tools/datagen/in.csv"
-output="/Users/simon/Docs/olandr/detamata/tools/datagen/out.csv"
+output="/Users/simon/Docs/olandr/detamata/tools/datagen/out.sql"
 print(input, output)
 
 data = pd.read_csv(input, sep=';', header=0, encoding="utf-8-sig")
@@ -12,7 +12,7 @@ header = list(data)
 utables = data.ix[:,0].unique()
 
 
-
+db = "homework"
 
 # VARCHAR(SIZE)
 SIZE = "255"
@@ -38,17 +38,16 @@ with open(output, "a") as out:
                 outstring.append("VARCHAR(" + SIZE + ")")
             if ((rows['!type'][ind-1:ind] == 'int').bool()):
                 outstring.append("INT")
-
             if (ind == len(rows)):
-                outstring.append("\n)\n")
+                outstring.append("\n);\n")
             else:
                 outstring.append(",\n")
             ind += 1
 
     # Here we write to the outputfile
     jndex = 0
+    out.write("DROP DATABASE " + db + ";\nCREATE DATABASE " + db + " CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;\nUSE "+ db + ";\n")
     while jndex < len(outstring):
         out.write(outstring[jndex])
         jndex += 1
-
 out.close()

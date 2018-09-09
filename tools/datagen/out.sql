@@ -1,3 +1,6 @@
+DROP DATABASE homework;
+CREATE DATABASE homework CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE homework;
 CREATE TABLE students(
 	student_uid INT,
 	name VARCHAR(255),
