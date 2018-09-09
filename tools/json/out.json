@@ -1,0 +1,28 @@
+{
+	"coffee":{
+		"7391835917292": {
+			"barcode":"7391835917292",
+			"company":"Arvid Nordquist",
+			"name":"MELLAN",
+			"slogan":"CLASSIC MELLANROST FRISK OCH FRUKTIG",
+			"10vote":"6",
+			"10less_water":"6",
+			"10LWcomment":"A little bit bitter",
+			"10more_water":"3",
+			"10MWcomment":"Pretty bland very boring",
+			"buyagain":"Highly not"
+		},
+		"1234567891011": {
+			"barcode":"1234567891011",
+			"company":"Placehold",
+			"name":"Coff",
+			"slogan":"MUMSFILLIBABBA",
+			"10vote":"10",
+			"10less_water":"10",
+			"10LWcomment":"MUMMA",
+			"10more_water":"0",
+			"10MWcomment":"GROSS",
+			"buyagain":"OBVIOUSLY"
+		}
+	}
+}
