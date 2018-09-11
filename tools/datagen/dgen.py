@@ -89,6 +89,11 @@ while tuple < GENERATE + BASEGEN:
                 # We want some strings to be "names", and some to be regular random words.
                 if ((rows['*column'][index-1:index].str.contains("name")).bool()):
                     outstring.append(names.get_full_name())
+                elif((rows['*column'][index-1:index].str.contains("gender")).bool()):
+                    if(bool(random.getrandbits(1))):
+                        outstring.append("M")
+                    else:
+                        outstring.append("F")
                 else:
                     outstring.append(rwob.random_word())
 
