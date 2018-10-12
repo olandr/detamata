@@ -1,3 +1,51 @@
-name: string @index(term) .
-column: uid @reverse @count .
-TYPE: string @index(term) .
+IATACode: string @index(term) @lang .
+Name: string @index(term) @lang .
+Country: uid @reverse @count .
+City: uid @reverse @count .
+Province: uid @reverse @count .
+Lat: float @index(float) .
+Long: float @index(float) .
+Elevation: float @index(float) .
+gmtOffset: float @index(float) .
+Island: uid @reverse @count .
+Country2: uid @reverse @count .
+Length: float @index(float) .
+Population: float @index(float) .
+localname: string @index(term) @lang .
+othername: string @index(term) @lang .
+Area: float @index(float) .
+Continent: uid @reverse @count .
+Code: uid @reverse @count .
+Capital: uid @reverse @count .
+CoordinatesGeoCoord: string @index(term) @lang .
+GDP: float @index(float) .
+Agriculture: float @index(float) .
+Service: float @index(float) .
+Industry: float @index(float) .
+Inflation: float @index(float) .
+Unemployment: float @index(float) .
+Percentage: float @index(float) .
+Desert: uid @reverse @count .
+type: string @index(term) @lang .
+Sea: uid @reverse @count .
+Organization: uid @reverse @count .
+River: uid @reverse @count .
+Depth: float @index(float) .
+Height: float @index(float) .
+Lake: uid @reverse @count .
+Sea1: uid @reverse @count .
+Sea2: uid @reverse @count .
+Mountains: uid @reverse @count .
+Abbreviation: string @index(term) @lang .
+Established: string @index(term) .
+Independence: string @index(term) .
+WasDependent: string @index(term) @lang .
+Government: string @index(term) @lang .
+Dependent: string @index(term) @lang .
+PopulationGrowth: float @index(float) .
+InfantMortality: float @index(float) .
+CapProv: string @index(term) @lang .
+Source: string @index(term) @lang .
+EstuaryElevation: string @index(term) @lang .
+EstuaryGeoCoord: float @index(float) .
+SourceElevation: float @index(float) .
