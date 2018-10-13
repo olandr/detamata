@@ -2,3 +2,4 @@
 !*.schema
 !*.bat
 !*.sh
+*.exe
