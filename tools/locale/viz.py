@@ -1,43 +1,18 @@
-#import networkx as nx
-# Schedule has the form: schedule[dayAsInteger (0-4)][dateYYYYMMDD][event (scheduled things)]
+#https://seaborn.pydata.org/generated/seaborn.stripplot.html#seaborn.stripplot
+# Seaborn basically
 
-schedule = [
+'''
+import numpy as np
+import pandas as pd
+import scipy
+'''
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-	{
-		'2018-10-08':
-        {'starttime': '08:00', 'endtime': '10:00',
-        'starttime': '10:00', 'endtime': '12:00',
-        'starttime': '15:00', 'endtime': '17:00',
-        }
-	},
-	{
-		'2018-10-09':
-        {'starttime': '08:00', 'endtime': '10:00',
-         'starttime': '13:00', 'endtime': '15:00'
-        }
-	},
-	{
-		'2018-10-10':
-        {'starttime': '10:00', 'endtime': '12:00',
-        'starttime': '15:00', 'endtime': '17:00',
-        'starttime': '17:00', 'endtime': '20:00'
-        }
-	},
-	{
-		'2018-10-11':
-        {'starttime': '16:00', 'endtime': '18:00',
-		'starttime': '10:00', 'endtime': '12:00',
-		'starttime': '13:00', 'endtime': '15:00'
-        }
-    },
-	{
-        '2018-10-12':
-        {'starttime': '08:00', 'endtime': '09:00',
-        'starttime': '09:00', 'endtime': '10:00',
-        'starttime': '10:00', 'endtime': '12:00'
-        }
-	}
-]
+dates = ['2018-10-08', '2018-10-09', '2018-10-10', '2018-10-11', '2018-10-12']
+emptySpot= [[12, 13, 14, 17, 18, 19, 20], [10, 11, 12, 15, 16, 17, 18, 19, 20], [8, 9, 12, 13, 14, 20], [8, 9, 12, 15, 18, 19, 20], [12, 13, 14, 15, 16, 17, 18, 19, 20]]
 
+sns.set(style="whitegrid")
+ax = sns.stripplot(data=emptySpot, jitter=False)
 
-print(schedule[0])
+plt.show()

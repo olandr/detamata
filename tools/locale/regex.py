@@ -23,16 +23,36 @@ def group_daily_schedule(dateVector, timeVector):
     index = 1
     jndex = 0
     # This will basically find the bijection and group each element of timeVector accordingly.
-    while index < len(dateVector):
+    while index <= len(dateVector):
         previous = index-1
         temp.append(timeVector[jndex])
-        if dateVector[previous] != dateVector[index]:
+        if index < len(dateVector):
+            if dateVector[previous] != dateVector[index]:
+                daily.append(temp)
+                temp = []
+        # When we have reached the final element, we need to append the grouping to the daily-output. I.e. the friday.
+        # This could possibly be moved around to be a bit more "beautiful".
+        else:
             daily.append(temp)
-            temp = []
         index += 1
         jndex += 1
     return daily
 
+# This function will find empty spots by crossing out those times that has been scheduled.
+# Returns a matrix whose cols are days and rows are empty hour.
+
+def find_empty_spots(daily):
+    emptyDays = []
+    for day in daily:
+        emptySchedule = list(range(8,21))
+        for thing in day:
+            interval = range(int(thing[0:2]), int(thing[2:4]))
+            for x in interval:
+                emptySchedule.remove(x)
+        emptyDays.append(emptySchedule)
+    return emptyDays
+
+
 date, time = format_schedule(unformat)
 daily = group_daily_schedule(date, time)
-print(daily)
+emptySpotsPerDay = find_empty_spots(daily)
