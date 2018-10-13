@@ -32,9 +32,9 @@ def fresh_get_locale(locale):
     searchButton = driver.find_element_by_xpath("//*[@id=\"searchDivContent2\"]/div[2]/h2[2]/div/input[2]")
     # We select one room at the time (in the prototyp I select the first room)
     searchBox.send_keys(locale)
+    time.sleep(1)
     searchButton.click()
     time.sleep(1)
-
     # The resulting room shall be selected and clicked on
     resultRoom = driver.find_element_by_id("objectsearchresult")
     resultRoom.click()
@@ -58,14 +58,21 @@ def process_locale(weekDiv):
         if daily != []:
             keeper.append(daily)
     # keeper is a nested array with each outer being a certain day (len=7), and the inner is the scheduled items.
-    titles = []
-    for day in keeper:
+    return keeper
+
+def format_schedule(unformat):
+    eventdate = []
+    eventtime = []
+    for day in unformat:
         for thing in day:
             # The title has a lot of fluff that we are not interested in. This is formatted with regex.
-            unformattedTitle = thing.get_attribute("title")
-            formattedTitle = re.sub(r'.*(\d\d\d\d-\d\d-\d\d \d\d:\d\d - \d\d:\d\d).*', r'\1', unformattedTitle)
-            titles.append(formattedTitle)
-    return titles
+            uf = thing.get_attribute("title")
+            day = re.sub(r'.*(\d\d\d\d-\d\d-\d\d) \d\d:\d\d - \d\d:\d\d.*', r'\1', uf)
+            period = re.sub(r'.*\d\d\d\d-\d\d-\d\d (\d\d):\d\d - (\d\d):\d\d.*', r'\1\2', uf)
+            #f = re.sub(r'\' (\d\d\d\d-\d\d-\d\d \d\d:\d\d - \d\d:\d\d).*\'', r'\1' , uf)
+            eventdate.append(day)
+            eventtime.append(period)
+    return eventdate, eventtime
 
 def reset_locale_search():
     reopenSearch = driver.find_element_by_id("openSearchButton")
@@ -76,12 +83,25 @@ def reset_locale_search():
     time.sleep(1)
 
 
-
+allLocaleDates = []
+allLocaleTimes = []
 driver = webdriver.Chrome()
 driver.get("https://cloud.timeedit.net/kth/web/public01/ri1f2XyQ0YvZ0YQ.html")
 initialisation()
+
 localWeekDiv = fresh_get_locale(relevantRooms[0])
-localeTitle = process_locale(localWeekDiv)
+# I will ignore the dates for now, as the file regex.py handles spot finding with the use of date. Not this file.
+dates, times = format_schedule(process_locale(localWeekDiv))
+allLocaleDates.append(dates)
+allLocaleTimes.append(times)
+
 time.sleep(1)
 reset_locale_search()
+
 localWeekDiv = fresh_get_locale(relevantRooms[1])
+dates, times = format_schedule(process_locale(localWeekDiv))
+allLocaleDates.append(dates)
+allLocaleTimes.append(times)
+
+print(allLocaleDates)
+print(allLocaleTimes)
