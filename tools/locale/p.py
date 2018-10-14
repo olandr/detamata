@@ -1,16 +1,10 @@
-import pandas as pd
-import re
 from selenium import webdriver
 from selenium.webdriver.support.ui  import Select
 from selenium.webdriver.common.keys import Keys
-
 import time
 
 # This link: https://cloud.timeedit.net/kth/web/public01/ri1f2XyQ0YvZ0YQ.html will preset the schedule Today --> On week
 # This link is standard: https://cloud.timeedit.net/kth/web/public01/ri1Q2.html
-
-# I will only start by looking at Q rooms (prototyping)
-relevantRooms = ["Q11", "Q13", "Q15", "Q17", "Q21", "Q22", "Q24", "Q26", "Q31", "Q33", "Q34", "Q36"]
 
 # This will initialise the dropdown to the correct dropdown option 'Lokal'.
 def initialisation():
@@ -26,7 +20,7 @@ def initialisation():
 def reset_locale_search():
     reopenSearch = driver.find_element_by_id("openSearchButton")
     reopenSearch.click()
-    time.sleep(1)
+    time.sleep(2)
     removeOldLocale = driver.find_element_by_id("leftclearbutton")
     removeOldLocale.click()
     time.sleep(1)
@@ -57,6 +51,7 @@ def fresh_get_locale(locale):
     getScheduleButton = driver.find_element_by_id("objectbasketgo")
     getScheduleButton.click()
     time.sleep(1)
+
     # The structure for the schedule output is //*[@id="contents"]/div[1]/div[4]/div[3]/div[8] (contents/weekContainer/weekDay/weekDiv/<no id>)
     # Where the last has the title.
     weekContainer = driver.find_element_by_class_name("weekContainer")
@@ -75,42 +70,29 @@ def process_locale(weekDiv):
     for day in weekDiv:
         daily = day.find_elements_by_class_name("bookingDiv")
         if daily != []:
-            keeper.append(daily)
+            for day in daily:
+                if day != []:
+                    keeper.append(day.get_attribute("title"))
     # keeper is a nested array with each outer being a certain day (len=7), and the inner is the scheduled items.
     return keeper
 
-'''
-WILL REMOVE THIS FUNCTION AND USE THE ONE IN regex.py.
-I only care for some info in the gathered data. Namely the starttime and endtime.
-
-'''
-def format_schedule(dframe, unformat, room):
-    eventdate = []
-    eventtime = []
-    for day in unformat:
-        for thing in day:
-            # The title has a lot of fluff that we are not interested in. This is formatted with regex.
-            uf = thing.get_attribute("title")
-            day = re.sub(r'.*(\d\d\d\d-\d\d-\d\d) \d\d:\d\d - \d\d:\d\d.*', r'\1', uf)
-            period = re.sub(r'.*\d\d\d\d-\d\d-\d\d (\d\d):\d\d - (\d\d):\d\d.*', r'\1\2', uf)
-            #f = re.sub(r'\' (\d\d\d\d-\d\d-\d\d \d\d:\d\d - \d\d:\d\d).*\'', r'\1' , uf)
-            temp = pd.DataFrame({'room': [room], 'date': [day], 'hour': [period]})
-            dframe = dframe.append(temp)
-    return dframe
-
-
-superFrame = pd.DataFrame(columns=['room', 'date', 'hour'])
 driver = webdriver.Chrome()
-driver.get("https://cloud.timeedit.net/kth/web/public01/ri1f2XyQ0YvZ0YQ.html")
+#14/10 I need another link cuz it does not work correctly on sundays.
+#driver.get("https://cloud.timeedit.net/kth/web/public01/ri1f2XyQ0YvZ0YQ.html")
+driver.get("https://cloud.timeedit.net/kth/web/public01/ri15230QX09Z50Q5Yg6g0535y60Y6.html")
 initialisation()
-# prototyping:
-i = 0
-while i < 2:
-    localWeekDiv = fresh_get_locale(relevantRooms[i])
-    # I will ignore the dates for now, as the file regex.py handles spot finding with the use of date. Not this file.
-    superFrame = format_schedule(superFrame, process_locale(localWeekDiv), relevantRooms[i])
-    time.sleep(1)
-    reset_locale_search()
-    i += 1
 
-print(superFrame)
+'''
+This is the function that will be called by outside callers (main)
+
+args:
+room    Room to scrape
+
+return  A list of unformatted data/info for each scheduled event.
+'''
+def scrape(room):
+    localWeekDiv = fresh_get_locale(room)
+    # I will ignore the dates for now, as the file regex.py handles spot finding with the use of date. Not this file.
+    unformat = process_locale(localWeekDiv)
+    reset_locale_search()
+    return unformat

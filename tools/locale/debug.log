@@ -5,3 +5,5 @@
 [1013/214130.413:ERROR:exception_snapshot_win.cc(88)] thread ID 14508 not found in process
 [1013/220025.069:ERROR:process_reader_win.cc(123)] NtOpenThread: {Åtkomst nekad} En process har begärt åtkomst till ett objekt, men har inte de rättigheter som krävs. (0xc0000022)
 [1013/220025.069:ERROR:exception_snapshot_win.cc(88)] thread ID 14740 not found in process
+[1014/100327.520:ERROR:process_reader_win.cc(123)] NtOpenThread: {Åtkomst nekad} En process har begärt åtkomst till ett objekt, men har inte de rättigheter som krävs. (0xc0000022)
+[1014/100327.525:ERROR:exception_snapshot_win.cc(88)] thread ID 8844 not found in process

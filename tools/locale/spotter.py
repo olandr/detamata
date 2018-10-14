@@ -1,7 +1,6 @@
 import pandas as pd
-from regex import get_full_frame
 
-superFrame = get_full_frame()
+# This is basically the return DataFrame that will be accessed by the visualisation-service.
 emptySpotFrame = pd.DataFrame(columns=['room', 'date', 'hour'])
 
 
@@ -45,5 +44,5 @@ def empty_spot_frame(room, date, emptySpots):
 
     return out
 
-def get_free_dataframe():
+def get_free_dataframe(superFrame):
     return find_empty_spots(superFrame)
